@@ -37,10 +37,9 @@ Step 2: Follow these steps to run the project locally:
 
 The project will be running at: http://localhost:5173/ (this is the default Vite port). Proceed to access it in your browser
 
-Technologies Used
+If given more time, I would implement the following improvements:
 
-- React (Frontend framework)
-
-- Vite (Build tool for fast development)
-
-- Tailwind CSS (Utility-first CSS framework)
+- Enhanced UI/UX – Improve the overall design to ensure better responsiveness, accessibility, and a more seamless user experience.
+- Dark Mode Support – Add a dark mode toggle to enhance usability and provide a more comfortable viewing experience.
+- Pagination Improvement – Implement infinite scrolling or a more dynamic pagination system for smoother navigation.
+- Better Error Handling & Loading States – Introduce skeleton loaders for a more polished look and improve error handling to enhance user feedback.
