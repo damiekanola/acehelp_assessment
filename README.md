@@ -15,19 +15,19 @@ Step 1: Make sure you have the following installed on your machine:
 
 - Node.js (LTS recommended)
 - Git
+- Visual Studio Code(optional)
 
 Step 2: Follow these steps to run the project locally:
 
-1. Clone the Repository
+1. Clone the Repository by running this code in your terminal
 
     git clone https://github.com/damiekanola/acehelp_assessment
 
-
 2. Navigate to the Project Directory
 
-    cd your-repo
+    cd your-repo (cd acehelp_assessment)
 
-3. Install Dependencies B
+3. Install all dependencies by running this code
 
    npm install OR  if you prefer yarn:  yarn install
 
@@ -35,7 +35,7 @@ Step 2: Follow these steps to run the project locally:
 
    npm run dev or yarn dev
 
-The project will be running at: http://localhost:5173/ (this is the default Vite port).
+The project will be running at: http://localhost:5173/ (this is the default Vite port). Proceed to access it in your browser
 
 Technologies Used
 

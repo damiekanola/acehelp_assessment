@@ -56,7 +56,8 @@ const HomePage = () => {
           const taskOwner = users.find((user) => user.id === todo.userId);
           return {
             ...todo,
-            userName: taskOwner ? taskOwner.name : "Unknown User",
+            userName: taskOwner ? taskOwner.name : "User not found!",
+            email: taskOwner ? taskOwner.email : "Email not found!",
           }; // create a new object with the tasks from the tasks data and then adding information about the user of the tasks
         });
         setTasks(mergedList);
@@ -81,7 +82,8 @@ const HomePage = () => {
       filtered = filtered.filter(
         (item) =>
           item.title.toLowerCase().includes(query.toLowerCase()) ||
-          item.userName.toLowerCase().includes(query.toLowerCase())
+          item.userName.toLowerCase().includes(query.toLowerCase()) ||
+          item.email.toLowerCase().includes(query.toLowerCase()) // search for a match in the task title, username or email
       );
     }
     setFilteredTasks(filtered);
@@ -117,7 +119,7 @@ const HomePage = () => {
             LOADING TASKS...
           </h1>
         ) : (
-          <div className=" flex flex-col justify-between">
+          <div className=" flex flex-col justify-between h-full">
             <div className=" grid grid-cols-2 gap-6 md:grid-cols-3 sm:grid-cols-3 lg:grid-cols-4">
               {currentTasks.map((todo) => (
                 <Card
@@ -125,11 +127,12 @@ const HomePage = () => {
                   title={todo.title}
                   completed={todo.completed}
                   user={todo.userName}
+                  email={todo.email}
                 />
               ))}
             </div>
             {totalPages > 1 && (
-              <div className="flex justify-center items-center mt-5">
+              <div className="flex justify-center items-center mt-6">
                 <button
                   className="px-4 py-2 mx-1 bg-gray-200 rounded disabled:opacity-50"
                   onClick={() =>
