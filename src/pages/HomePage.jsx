@@ -1,13 +1,15 @@
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
-import { useEffect, useState } from "react";
+import useDebounce from "../hooks/Debounce";
+import { useEffect, useState, useMemo } from "react";
 
 const HomePage = () => {
   const [loading, setLoading] = useState(true);
   const [task, setTasks] = useState([]);
-  const [filteredTasks, setFilteredTasks] = useState([]);
+ 
   const [selectedStatus, setSelectedStatus] = useState("");
   const [query, setQuery] = useState("");
+  const debouncedQuery = useDebounce(query, 500); 
   const [currentPage, setCurrentPage] = useState(1);
   const tasksPerPage = 20; //number of to-dos shown per page
 
@@ -61,7 +63,7 @@ const HomePage = () => {
           }; // create a new object with the tasks from the tasks data and then adding information about the user of the tasks
         });
         setTasks(mergedList);
-        setFilteredTasks(mergedList);
+     
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -69,26 +71,29 @@ const HomePage = () => {
       .finally(() => setLoading(false)); // Ensure loading state is updated
   }, []);
 
-  useEffect(() => {
-    let filtered = [...task]; // create a duplicate array
+
+
+  const filteredTasks = useMemo(() => {
+    let filtered = [...task];
+
     if (selectedStatus) {
-      filtered = task.filter(
-        (item) =>
-          selectedStatus === "completed" ? item.completed : !item.completed //filter through the tasks to determine which is completed and which is not
+      filtered = filtered.filter((item) =>
+        selectedStatus === "completed" ? item.completed : !item.completed
       );
     }
 
-    if (query.trim() !== "") {
+    if (debouncedQuery.trim() !== "") {
       filtered = filtered.filter(
         (item) =>
-          item.title.toLowerCase().includes(query.toLowerCase()) ||
-          item.userName.toLowerCase().includes(query.toLowerCase()) ||
-          item.email.toLowerCase().includes(query.toLowerCase()) // search for a match in the task title, username or email
+          item.title.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
+          item.userName.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
+          item.email.toLowerCase().includes(debouncedQuery.toLowerCase())
       );
     }
-    setFilteredTasks(filtered);
-    setCurrentPage(1);
-  }, [selectedStatus, task, query]);
+
+    setCurrentPage(1); // Reset pagination on filter change
+    return filtered;
+  }, [task, selectedStatus, debouncedQuery]); // Dependencies
 
   //logic to handle pagination
   const totalPages = Math.ceil(filteredTasks.length / tasksPerPage);
