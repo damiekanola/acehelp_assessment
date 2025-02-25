@@ -20,20 +20,20 @@ Step 2: Follow these steps to run the project locally:
 
 1. Clone the Repository
 
-git clone https://github.com/damiekanola/acehelp_assessment
+    git clone https://github.com/damiekanola/acehelp_assessment
 
 
 2. Navigate to the Project Directory
 
-cd your-repo
+    cd your-repo
 
 3. Install Dependencies B
 
-npm install OR  if you prefer yarn:  yarn install
+   npm install OR  if you prefer yarn:  yarn install
 
 4. Start the Development Server
 
-npm run dev or yarn dev
+   npm run dev or yarn dev
 
 The project will be running at: http://localhost:5173/ (this is the default Vite port).
 
